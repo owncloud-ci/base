@@ -115,22 +115,20 @@ docker volume create owncloud_redis
 
 docker run -d \
   --name redis \
-  -e REDIS_DATABASES=1 \
   --volume owncloud_redis:/var/lib/redis \
-  webhippie/redis:latest
+  redis:latest
 
 docker volume create owncloud_mysql
 docker volume create owncloud_backup
 
 docker run -d \
   --name mariadb \
-  -e MARIADB_ROOT_PASSWORD=owncloud \
-  -e MARIADB_USERNAME=owncloud \
-  -e MARIADB_PASSWORD=owncloud \
-  -e MARIADB_DATABASE=owncloud \
+  -e MYSQL_ROOT_PASSWORD=owncloud \
+  -e MYSQL_USER=owncloud \
+  -e MYSQL_PASSWORD=owncloud \
+  -e MYSQL_DATABASE=owncloud \
   --volume owncloud_mysql:/var/lib/mysql \
-  --volume owncloud_backup:/var/lib/backup \
-  webhippie/mariadb:latest
+  mariadb:latest
 ```
 
 Then you can download an ownCloud tarball and start the ownCloud web server, you can customize the used environment variables as needed:
